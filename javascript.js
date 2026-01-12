@@ -92,3 +92,4 @@ console.log('Final Verdict:')
 if(playerScore>computerScore) console.log('Player Wins!')
 else if(playerScore < computerScore) console.log('Computer Wins!');
 else console.log('Draw!');
+console.log('trial');
