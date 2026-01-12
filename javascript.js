@@ -1,3 +1,5 @@
+//const { cloneElement } = require("react");
+
 console.log("Welcome to rock paper scissors!");
 
 
@@ -18,11 +20,6 @@ function getComputerChoice()
 }
 
 /* Human Choice */
-function getHumanChoice()
-{
-    let choice = prompt("Please Enter which do you want: ");
-    return choice;
-}
 
 function playRound(humanChoice, computerChoice)
 {
@@ -70,11 +67,61 @@ function playRound(humanChoice, computerChoice)
 let playerScore = 0;
 let computerScore = 0;
 
+while(true){
+    if(playerScore === 5 || computerScore === 5){
+        const box = document.createElement('div');
+        box.classList.add('final');
+
+    if(playerScore === 5){
+        box.textContent = "PLAYER WINS!";
+    }else if(computerScore === 5)
+    {
+        box.textContent = "COMPUTER WINS!";
+    }
+    box.setAttribute('style', 'background-color:pink; font-size:25px;')
+
+    const ovr = document.querySelector('.ovr');
+    ovr.appendChild(box);
+    }
+    
+    
+    
+    const container = document.querySelector('#container');
+    let human_choice = "";
 
 
+    container.addEventListener("click", (event) =>
+    {   
+        event.preventDefault();
+        let target = event.target;
+        human_choice = target.id;
+        console.log("here human choice : "+human_choice);
+        
+        let res = playRound(human_choice, getComputerChoice());
+        if(res) playerScore+=1;
+        else computerScore+=1;
+        const pscore = document.createElement('p');
+        const cscore = document.createElement('p');
+        pscore.textcontent = playerScore;
+        cscore.textContent = computerScore;
+        
+        const playerbox = document.querySelector('#playerbox');
+        const compbox = document.querySelector('#compbox');
+
+        playerbox.removeChild(pscore);
+        compbox.removeChild(cscore);
+
+        playerbox.appendChild(pscore);
+        compbox.appendChild(cscore);
+
+
+        human_choice = "";
+    });
+}
 /* Main */
-for(let i = 0; i < 5; i++)
-{
+
+
+    /*
     let decision = playRound(getHumanChoice(), getComputerChoice());
     if(decision)playerScore+=1;
     else if(decision == false) computerScore += 1;
@@ -86,10 +133,10 @@ for(let i = 0; i < 5; i++)
     console.log(display_comp);
     console.log(display_human);
     console.log('\n');
-}
 
 console.log('Final Verdict:')
 if(playerScore>computerScore) console.log('Player Wins!')
 else if(playerScore < computerScore) console.log('Computer Wins!');
 else console.log('Draw!');
 console.log('trial');
+*/
