@@ -67,57 +67,86 @@ function playRound(humanChoice, computerChoice)
 let playerScore = 0;
 let computerScore = 0;
 
-while(true){
-    if(playerScore === 5 || computerScore === 5){
-        const box = document.createElement('div');
-        box.classList.add('final');
 
+function checkWinner()
+{
     if(playerScore === 5){
-        box.textContent = "PLAYER WINS!";
+        return 'human';
     }else if(computerScore === 5)
     {
-        box.textContent = "COMPUTER WINS!";
+        return 'computer';
+    }else
+    {
+        return 'play';
     }
-    box.setAttribute('style', 'background-color:pink; font-size:25px;')
+}
+const playerbox = document.querySelector("#playerbox");
+const compbox = document.querySelector("#compbox");
 
+const pscore = document.createElement("p");
+const cscore = document.createElement("p");
+pscore.textContent = playerScore;
+cscore.textContent = computerScore;
+playerbox.appendChild(pscore);
+compbox.appendChild(cscore);
+
+
+function updateUI()
+{
+    
+      pscore.textContent = playerScore;
+      cscore.textContent = computerScore;
+      playerbox.removeChild(pscore);
+      compbox.removeChild(cscore);
+
+      playerbox.appendChild(pscore);
+      compbox.appendChild(cscore);
+}
+
+function finalwinner(player)
+{
+
+    const finalbox = document.createElement('div');
+    finalbox.classList.add('finalbox');
+    finalbox.textContent = `Game Over! ${player} Wins!!!`;
+    finalbox.setAttribute('style', 'color:red; font-size:20px; padding:5px; margin:15px;');
     const ovr = document.querySelector('.ovr');
-    ovr.appendChild(box);
-    }
+    ovr.appendChild(finalbox);
+}
     
     
     
-    const container = document.querySelector('#container');
+    
+    const container = document.querySelector("#container");
     let human_choice = "";
 
+    container.addEventListener("click", (event) => {
+      event.preventDefault();
+      let target = event.target;
+      human_choice = target.id;
+      console.log("here human choice : " + human_choice);
 
-    container.addEventListener("click", (event) =>
-    {   
-        event.preventDefault();
-        let target = event.target;
-        human_choice = target.id;
-        console.log("here human choice : "+human_choice);
-        
-        let res = playRound(human_choice, getComputerChoice());
-        if(res) playerScore+=1;
-        else computerScore+=1;
-        const pscore = document.createElement('p');
-        const cscore = document.createElement('p');
-        pscore.textcontent = playerScore;
-        cscore.textContent = computerScore;
-        
-        const playerbox = document.querySelector('#playerbox');
-        const compbox = document.querySelector('#compbox');
+      let res = playRound(human_choice, getComputerChoice());
+      if (res == true) playerScore += 1;
+      else if(res == false) computerScore += 1;
 
-        playerbox.removeChild(pscore);
-        compbox.removeChild(cscore);
+      updateUI();
+      let win = checkWinner();
+      if(win === 'human')
+      {
+        finalwinner('human');
+      }else if(win === 'computer')
+      {
+        finalwinner('computer');
+      }
 
-        playerbox.appendChild(pscore);
-        compbox.appendChild(cscore);
+      
 
-
-        human_choice = "";
+      human_choice = "";
     });
-}
+
+
+
 /* Main */
 
 
