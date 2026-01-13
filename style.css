@@ -1,12 +1,27 @@
+body{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+
 #container
 {
-    margin: 10%;
+    display:flex;
+    justify-content: center;
+    margin: 2%;
     gap : 2%;
 }
 button{
-    margin:2%;
-    font-size: 20px;
-    padding:5px;
+    margin:4%;
+    margin-bottom:6%;
+    font-size: 24px;
+    padding-left:20px; padding-right:20px;
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color: rgb(58, 100, 137);
+    color:rgb(239, 248, 255);
+    border-radius: 10px;
+    border-style:none;
 }
 
 .ovr
@@ -18,13 +33,23 @@ button{
 
 #announcement
 {
+    display:flex;
+    justify-content: center;
     margin : 5%;
 }
 .box
 {
-    height:150px;
-    width:150px;
-    background-color: antiquewhite;
+    height:50px;
+    width: 175px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right : 15px;
+    background-color: rgb(227, 234, 255);
     margin: 5%;
+    display:flex;
+    justify-content: center;
+    gap:15px;
+    border-radius: 8px;
 }
 
